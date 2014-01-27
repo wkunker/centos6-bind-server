@@ -1,0 +1,9 @@
+$ORIGIN 1.168.192.in-addr.arpa.
+
+$TTL 3D
+
+@	SOA	dns.testzone.apt.	root.testzone.apt. (12 4h 1h 1w 1h)
+
+@	IN	NS	dns.testzone.apt.
+
+211	IN	PTR	dns.testzone.apt.
