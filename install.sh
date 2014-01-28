@@ -1,4 +1,5 @@
 #!/bin/sh
+UUID=$(cat /etc/sysconfig/network-scripts/ifcfg-eth0 | grep UUID | cut -d'=' -f2)
 IPADDR=$(ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
 KEYNAME="wkunker.gmail.com."
 ZONENAME="testzone.apt"
@@ -11,6 +12,7 @@ sed -i "s/key wkunker.gmail.com./$KEYNAME/g" install/var/named/keys.conf
 sed -i "s/secret *$/secret \"$SECRET\"/g" install/var/named/keys.conf
 sed -i "s/search testzone.apt/search $ZONENAME/g" install/etc/resolv.conf
 sed -i "s/^HWADDR=*$/HWADDR=$HARDWAREADDR/g" install/etc/sysconfig/network-scripts/ifcfg-eth0
+sed -i "s/^UUID=*$/UUID=$UUID/g" install/etc/sysconfig/network-scripts/ifcfg-eth0
 service named start
 service named stop
 service iptables stop
